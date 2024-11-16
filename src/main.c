@@ -43,10 +43,24 @@ int main(void) {
 	RemoveNthElement(&head, 0);
 	RemoveNthElement(&head, 6);
 
+	/*Не выполнит ничего*/
+	RemoveNthElement(&head, -6);
+
 	InsertMemberAsNth(&head, 2, 13.37);
 	InsertMemberAsNth(&head, 0, 9.11);
 
+	/*Выдадут ошибку, не сделают ничего со списком*/
+	if(!InsertMemberAsNth(&head, -1, 9.11)){
+		fprintf(stderr, "Не удалось вставить элемент по индексу %d!\n", -1);
+	}
+	if(!InsertMemberAsNth(&head, 100, 9.11)){
+		fprintf(stderr, "Не удалось вставить элемент по индексу %d!\n", 100);
+	}
+
 	PrintList(head);
+	ListMemberRemoveList(&head);
+
+	/*Не выполнит ничего*/
 	ListMemberRemoveList(&head);
 
 	assert(head == NULL);
