@@ -26,11 +26,11 @@ static inline void PrintList(ListMember const *const ptr) {
 int main(void) {
 	// srand((unsigned int)time(NULL));
 
-	const int size = INT16_MAX;
+	const int size = 16;
 	DATATYPE array[size];
 	for (int i = 0; i < size; ++i) {
 		array[i] = (DATATYPE)i;
-		printf("array[%d] = %.2lf\n", i, array[i]);
+		// printf("array[%d] = %.2lf\n", i, array[i]);
 	}
 
 	ListMember *head = CreateListFromArray(array, size);
@@ -39,10 +39,20 @@ int main(void) {
 		return EXIT_FAILURE;
 	}
 
+	RemoveNthElement(&head, 3);
+	RemoveNthElement(&head, 0);
+	RemoveNthElement(&head, 6);
+
+	InsertMemberAsNth(&head, 2, 13.37);
+	InsertMemberAsNth(&head, 0, 9.11);
+
 	PrintList(head);
 	ListMemberRemoveList(&head);
 
 	assert(head == NULL);
-	assert(memb_counter == 0);
+	if (memb_counter != 0){
+		fprintf(stderr, "FAIL: memb_counter = %d\n", memb_counter); 
+		return EXIT_FAILURE;
+	}
 	return EXIT_SUCCESS;
 }
