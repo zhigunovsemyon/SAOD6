@@ -26,7 +26,7 @@ static inline void PrintList(ListMember const *const ptr) {
 int main(void) {
 	// srand((unsigned int)time(NULL));
 
-	const int size = 16;
+#define size 16
 	DATATYPE array[size];
 	for (int i = 0; i < size; ++i) {
 		array[i] = (DATATYPE)i;
