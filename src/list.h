@@ -28,3 +28,6 @@ ListMember *CreateListFromArray(DATATYPE const *const src, int const len);
 
 /*Удаление всего списка*/
 void ListMemberRemoveList(ListMember **ptr);
+
+/*Доступ к данным n-ного элемента списка ptr*/
+DATATYPE *ListMemberGetNthData(ListMember *ptr, int const n);

@@ -13,6 +13,14 @@ static void Free(void *ptr){
 #define malloc Malloc
 #define free Free
 
+static ListMember **GotoNthElement(ListMember **ptr, int const n) {
+	return (n /*!=0*/) ? GotoNthElement(&((*ptr)->next), n - 1) : ptr;
+}
+
+DATATYPE *ListMemberGetNthData(ListMember *ptr, int const n) {
+	return &((*GotoNthElement(&ptr, n))->data);
+}
+
 /*Создание элемента*/
 ListMember *ListMemberAllocate(DATATYPE const data, ListMember *const next) {
 	ListMember *el; /*Создаваемый элемент*/
