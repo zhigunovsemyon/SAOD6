@@ -67,12 +67,8 @@ ListMember * CreateListFromArray(DATATYPE const *const src, int const len){
 	if (!(src && len))
 		return NULL;
 
-	ListMember *const tail = ListMemberAllocate(src[len - 1], NULL);
-	if(!tail)
-		return NULL;
-
-	ListMember *head = tail;
-	for (int i = len - 2; i >= 0; --i){
+	ListMember *head = NULL;
+	for (int i = len - 1; i >= 0; --i){
 		head = ListMemberAllocate(src[i], head);
 		// assert(head != NULL); //Заменить на "деструктор"	
 	}
