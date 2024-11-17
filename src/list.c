@@ -2,11 +2,11 @@
 #include <stdlib.h> /*malloc(); free()*/
 
 int memb_counter = 0;
-void* Malloc(size_t const size){
+static void* Malloc(size_t const size){
 	++memb_counter;
 	return malloc(size);
 }
-void Free(void *ptr){
+static void Free(void *ptr){
 	--memb_counter;
 	free(ptr);
 }
@@ -69,8 +69,12 @@ ListMember * CreateListFromArray(DATATYPE const *const src, int const len){
 
 	ListMember *head = NULL;
 	for (int i = len - 1; i >= 0; --i){
+		/*Создание нового элемента, проверка*/
 		head = ListMemberAllocate(src[i], head);
-		// assert(head != NULL); //Заменить на "деструктор"	
+		if (!head /*==NULL*/) {
+			ListMemberRemoveList(&head);
+			break; //Выход из цикла перевыделений
+		}
 	}
 
 	return head;
