@@ -31,3 +31,7 @@ void ListMemberRemoveList(ListMember **ptr);
 
 /*Доступ к данным n-ного элемента списка ptr*/
 DATATYPE *ListMemberGetNthData(ListMember *ptr, int const n);
+
+/*Меняет местами m-й и n-й элементы списка.
+Возвращает 0 при успешной перестановке, 1 при неудаче*/
+int ListMemberSwapMembers(ListMember **ptr, int m, int n);

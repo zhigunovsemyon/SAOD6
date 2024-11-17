@@ -13,9 +13,19 @@ static void Free(void *ptr){
 #define malloc Malloc
 #define free Free
 
+static void SwapPointers(void const **a, void const **b) {
+	const void *const tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+static void SwapInt(int *const a, int *const b) {
+	const int tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
 static ListMember **GotoNthElement(ListMember **ptr, int const n) {
-	if (!(ptr) /*==NULL*/)
-		return NULL;
 	if (!(*ptr) /*==NULL*/)
 		return NULL;
 	return (n /*!=0*/) ? GotoNthElement(&((*ptr)->next), n - 1) : ptr;
@@ -24,6 +34,26 @@ static ListMember **GotoNthElement(ListMember **ptr, int const n) {
 DATATYPE *ListMemberGetNthData(ListMember *ptr, int const n) {
 	ListMember **ptr_el = GotoNthElement(&ptr, n);
 	return (ptr_el) ? &((*ptr_el)->data) : NULL;
+}
+
+int ListMemberSwapMembers(ListMember **ptr, int m, int n) {
+	if (m < 0 || n < 0)
+		return 1;
+	if (m == n)
+		return 0;
+	if (m > n)
+		SwapInt(&m, &n);
+	ListMember **ptr1 = GotoNthElement(ptr, m);
+	ListMember **ptr2 = GotoNthElement(ptr1, n);
+	if (!(ptr1 && ptr2))
+		return 1;
+
+	ListMember *next1 = (*ptr1)->next;
+	ListMember *next2 = (*ptr2)->next;
+	SwapPointers(ptr1, ptr2);
+	(*ptr1)->next = next1;
+	(*ptr2)->next = next2;
+	return 0;
 }
 
 /*Создание элемента*/

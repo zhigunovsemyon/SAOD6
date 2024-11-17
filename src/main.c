@@ -39,16 +39,6 @@ int main(void) {
 		return EXIT_FAILURE;
 	}
 
-	RemoveNthElement(&head, 3);
-	RemoveNthElement(&head, 0);
-	RemoveNthElement(&head, 6);
-
-	/*Не выполнит ничего*/
-	RemoveNthElement(&head, -6);
-
-	InsertMemberAsNth(&head, 2, 13.37);
-	InsertMemberAsNth(&head, 0, 9.11);
-
 	/*Выдадут ошибку, не сделают ничего со списком*/
 	if(!InsertMemberAsNth(&head, -1, 9.11)){
 		fprintf(stderr, "Не удалось вставить элемент по индексу %d!\n", -1);
@@ -56,6 +46,9 @@ int main(void) {
 	if(!InsertMemberAsNth(&head, 100, 9.11)){
 		fprintf(stderr, "Не удалось вставить элемент по индексу %d!\n", 100);
 	}
+
+	if(ListMemberSwapMembers(&head, 1, 1))
+		fprintf(stderr, "Не удалось переставить элементы местами!\n");
 
 	PrintList(head);
 	ListMemberRemoveList(&head);
