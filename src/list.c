@@ -44,13 +44,13 @@ int ListMemberSwapMembers(ListMember **ptr, int m, int n) {
 	if (m > n)
 		SwapInt(&m, &n);
 	ListMember **ptr1 = GotoNthElement(ptr, m);
-	ListMember **ptr2 = GotoNthElement(ptr1, n);
+	ListMember **ptr2 = GotoNthElement(ptr1, n - m);
 	if (!(ptr1 && ptr2))
 		return 1;
 
 	ListMember *next1 = (*ptr1)->next;
 	ListMember *next2 = (*ptr2)->next;
-	SwapPointers(ptr1, ptr2);
+	SwapPointers((void *)ptr1, (void *)ptr2);
 	(*ptr1)->next = next1;
 	(*ptr2)->next = next2;
 	return 0;
