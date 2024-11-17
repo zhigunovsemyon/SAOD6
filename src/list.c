@@ -14,11 +14,16 @@ static void Free(void *ptr){
 #define free Free
 
 static ListMember **GotoNthElement(ListMember **ptr, int const n) {
+	if (!(ptr) /*==NULL*/)
+		return NULL;
+	if (!(*ptr) /*==NULL*/)
+		return NULL;
 	return (n /*!=0*/) ? GotoNthElement(&((*ptr)->next), n - 1) : ptr;
 }
 
 DATATYPE *ListMemberGetNthData(ListMember *ptr, int const n) {
-	return &((*GotoNthElement(&ptr, n))->data);
+	ListMember **ptr_el = GotoNthElement(&ptr, n);
+	return (ptr_el) ? &((*ptr_el)->data) : NULL;
 }
 
 /*Создание элемента*/
