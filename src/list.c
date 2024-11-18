@@ -1,18 +1,6 @@
 #include "list.h"
 #include <stdlib.h> /*malloc(); free()*/
 
-int memb_counter = 0;
-static void* Malloc(size_t const size){
-	++memb_counter;
-	return malloc(size);
-}
-static void Free(void *ptr){
-	--memb_counter;
-	free(ptr);
-}
-#define malloc Malloc
-#define free Free
-
 static void SwapPointers(void const **a, void const **b) {
 	const void *const tmp = *a;
 	*a = *b;

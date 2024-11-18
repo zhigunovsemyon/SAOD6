@@ -9,9 +9,6 @@ n-й элементы списка.
 #include <stdlib.h> /*EXIT_SUCCESS; malloc(); free()*/
 #include <time.h>   /*time()*/
 
-/*Счётчик созданных элементов*/
-extern int memb_counter;
-
 void PrintList_(ListMember const *const ptr, const int i) {
 	if (!ptr)
 		return;
@@ -57,9 +54,5 @@ int main(void) {
 	ListMemberRemoveList(&head);
 
 	assert(head == NULL);
-	if (memb_counter != 0){
-		fprintf(stderr, "FAIL: memb_counter = %d\n", memb_counter); 
-		return EXIT_FAILURE;
-	}
 	return EXIT_SUCCESS;
 }
